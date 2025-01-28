@@ -2,20 +2,137 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Fondo y estilo general de la página */
+body {
+  font-family: 'VT323', sans-serif;
+  background: linear-gradient(to right, #ffffff, #cecece);
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/******* NAVBAR ********/
+nav {
+  background-color: #e11d48; /* Rojo vibrante */
+}
+
+nav h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: white;
+  margin: 0; /* Eliminar espacio innecesario */
+}
+
+nav .space-x-6 {
+  display: flex;
+  gap: 1.5rem; /* Espacio entre los enlaces */
+}
+
+nav a {
+  color: white;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+nav a:hover {
+  color: #fca5a5; /* Rojo claro al pasar el cursor */
+  transition: color 0.3s ease;
+}
+
+/* Aseguramos que el navbar esté fijo en la parte superior */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 50;
+}
+
+/**********************/
+
+
+
+/* Contenedor principal */
+.min-h-screen {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 2rem;
+}
+
+/* Media Queries */
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Transiciones */
+.card-container {
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.card-container:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+button {
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+button:hover {
+  transform: scale(1.05);
+}
+
+
+/* Aseguramos que el contenedor de Swiper esté contenido dentro del ancho de la pantalla */
+.swiper-container {
+  width: 100%;
+  max-width: 100%; /* Garantiza que no se expanda más allá del límite de la pantalla */
+  padding: 20px 0;
+}
+
+/* Contenido de las cartas */
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%; /* Limitar el tamaño del slide */
+}
+
+/* Estilo de las cartas dentro de los slides */
+.swiper-slide .flex {
+  max-width: 300px; /* Limitar el tamaño de las cartas */
+  width: 100%; /* Asegura que no se expanda más allá del contenedor */
+}
+
+/* Ajuste de las imágenes para que no se deformen */
+.swiper-slide img {
+  max-height: 200px;
+  object-fit: contain;
+}
+
+/* Estilo para los botones de navegación */
+.swiper-button-next, .swiper-button-prev {
+  color: #007bff; /* Cambiar el color de las flechas */
+  background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco con opacidad */
+  border-radius: 50%; /* Flechas redondeadas */
+  padding: 10px; /* Añadir algo de padding a las flechas */
+}
+
+.swiper-button-next:hover, .swiper-button-prev:hover {
+  background-color: rgba(255, 255, 255, 1); /* Fondo blanco sin opacidad cuando pasa el mouse */
 }
