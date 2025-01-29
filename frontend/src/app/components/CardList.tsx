@@ -1,8 +1,11 @@
 // src/app/components/CardList.tsx
 "use client";
+
+import Image from 'next/image';
+import { Card } from "@/types";
 import Link from "next/link";
 
-export default function CardList({ cards }: { cards: any[] }) {
+export default function CardList({ cards }: { cards: Card[] }) {
   return (
     <div className="flex flex-wrap gap-6">
       {cards.map((card) => (
@@ -10,7 +13,7 @@ export default function CardList({ cards }: { cards: any[] }) {
           key={card.id}
           className="w-64 bg-gray-100 p-4 rounded-md shadow-md animate__animated animate__fadeIn"
         >
-          <img
+          <Image
             src={card.images[0]?.url || "/placeholder.png"}
             alt={card.name}
             className="w-full h-48 object-contain mb-4"
