@@ -1,0 +1,35 @@
+version: '3.8'
+services:
+  # Frontend - Next.js
+  frontend:
+    build:
+      context: ./frontend  # Usa la carpeta frontend como contexto
+      dockerfile: Dockerfile  # El Dockerfile está en la raíz de ./frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    networks:
+      - app-network
+    depends_on:
+      - db  # Asegura que la base de datos esté lista antes de iniciar el frontend
+
+  # Base de datos PostgreSQL
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: ash
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: pokemon_db
+    volumes:
+      - ./db_data:/var/lib/postgresql/data
+      - ./database/database_backup.sql:/docker-entrypoint-initdb.d/database_backup.sql
+      - ./database/create_user_and_db.sql:/docker-entrypoint-initdb.d/create_user_and_db.sql  # Agregar el archivo SQL aquí
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
