@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 
 const Navbar = () => {
@@ -15,9 +16,9 @@ const Navbar = () => {
         </div>
         {/* Links de navegación */}
         <div className="space-x-6">
-          <a href="/" className="text-white hover:text-red-300 transition duration-200">Inicio</a>
-          <a href="/sets" className="text-white hover:text-red-300 transition duration-200">Sets</a>
-          <a href="/cards" className="text-white hover:text-red-300 transition duration-200">Cartas</a>
+          <Link href='/' className="text-white hover:text-red-300 transition duration-200" >Inicio</Link>
+          <Link href="/sets" className="text-white hover:text-red-300 transition duration-200">Sets</Link>
+          <Link href="/cards" className="text-white hover:text-red-300 transition duration-200">Cartas</Link>
         </div>
       </div>
     </nav>
