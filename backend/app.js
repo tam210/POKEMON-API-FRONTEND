@@ -16,8 +16,8 @@ app.use(express.json());
 app.use(cors());
 
 // Rutas
-app.use('/sets', setRouter);
-app.use('/cards', cardRouter);
+app.use('/api/sets', setRouter);
+app.use('/api/cards', cardRouter);
 
 // Iniciar el servidor
 sequelize.sync({ alter: true }).then(() => {
