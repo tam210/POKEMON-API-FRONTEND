@@ -1,7 +1,9 @@
-import "animate.css"; // Importamos animate.css para la animación
+// /app/cards/[id]/page.tsx
+import Image from 'next/image';
 
-// Simulando la obtención de los detalles de la carta por ID
+// Simulamos la obtención de los detalles de la carta por ID
 async function getCardDetails(id: string) {
+  // Aquí deberías realizar una consulta a una API o base de datos para obtener los datos reales
   return {
     id,
     name: "Charizard",
@@ -12,16 +14,22 @@ async function getCardDetails(id: string) {
   };
 }
 
+// Componente Server-side para obtener la carta
 export default async function CardDetailPage({ params }: { params: { id: string } }) {
-  const card = await getCardDetails(params.id);
+  // Obtén el ID desde los parámetros
+  const { id } = params; // Remove the `await` here
+  console.log(id);
 
+  // Llamada asíncrona para obtener los detalles de la carta
+  const card = await getCardDetails(id);
+
+  // Renderizamos la vista de los detalles de la carta
   return (
     <div className="p-6 flex justify-center animate__animated animate__fadeIn">
-      {/* Contenedor de la imagen de la carta */}
       <div className="flex w-full max-w-4xl gap-6">
         {/* Imagen de la carta a la izquierda */}
         <div className="w-1/3 flex justify-center">
-          <img
+          <Image
             src={card.images[0]?.url || "/placeholder.png"}
             alt={card.name}
             className="h-96 object-contain rounded-md"
