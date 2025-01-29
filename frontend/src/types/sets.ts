@@ -31,7 +31,7 @@ export interface Set {
   updated_at: string;
   symbol_url: string;
   logo_url: string;
-  cards: Card[];  // Un set tiene un array de cartas
+  cards: number[];  // Un set tiene un array de cartas
 }
 
 // Interfaz para el mercado de una carta
