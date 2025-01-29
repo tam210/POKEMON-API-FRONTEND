@@ -7,26 +7,55 @@ import { Swiper, SwiperSlide } from "swiper/react"; // Importamos Swiper y Swipe
 import "swiper/css"; // Importamos los estilos básicos de Swiper
 import "swiper/css/navigation"; // Importamos los estilos para la navegación
 import { Navigation } from "swiper/modules"; // Importamos el módulo de navegación correctamente
+import Image from 'next/image';
 
-// Configuramos Swiper para usar Navigation
+// Definición de tipos para las cartas
+interface Card {
+  id: number;
+  name: string;
+  image: string;
+}
+
+// Simulación de llamada a API (puedes cambiarlo por la llamada real a tu API)
+const fetchCardsBySetId = async (setId: string): Promise<Card[]> => {
+  // Simulamos la llamada a una API para obtener las cartas por el setId
+  console.log(setId);
+  return new Promise((resolve) =>
+    setTimeout(() => {
+      resolve([
+        { id: 1, name: "Charizard", image: "/images/charizard.png" },
+        { id: 2, name: "Blastoise", image: "/images/blastoise.png" },
+        { id: 3, name: "Venusaur", image: "/images/venusaur.png" },
+        { id: 4, name: "Pikachu", image: "/images/pikachu.png" },
+        { id: 5, name: "Mewtwo", image: "/images/mewtwo.png" },
+      ]);
+    }, 1000)
+  );
+};
+
 export default function SetDetail() {
-  const { id } = useParams();
+  const { id } = useParams(); // Obtenemos el 'id' del set desde la URL
+  const [cards, setCards] = useState<Card[]>([]); // Estado para las cartas
   const [fade, setFade] = useState(false);
 
   useEffect(() => {
-    const timeout = setTimeout(() => setFade(true), 100);
-    return () => clearTimeout(timeout);
-  }, []);
+    if (!id || Array.isArray(id)) return; // Asegurarnos de que 'id' no es un arreglo
 
-  // Simulación de datos de cartas (pueden venir de una API)
-  const cards = [
-    { id: 1, name: "Charizard", image: "/images/charizard.png" },
-    { id: 2, name: "Blastoise", image: "/images/blastoise.png" },
-    { id: 3, name: "Venusaur", image: "/images/venusaur.png" },
-    { id: 4, name: "Pikachu", image: "/images/pikachu.png" },
-    { id: 5, name: "Mewtwo", image: "/images/mewtwo.png" },
-    // Puedes agregar más cartas si es necesario
-  ];
+    const loadCards = async () => {
+      try {
+        const data = await fetchCardsBySetId(id); // Obtener datos asíncronos
+        setCards(data); // Actualizar el estado con los datos obtenidos
+      } catch (error) {
+        console.error("Error al cargar las cartas", error);
+      }
+    };
+
+    loadCards();
+
+    // Control de fade-in (transición de opacidad)
+    const timeout = setTimeout(() => setFade(true), 100);
+    return () => clearTimeout(timeout); // Limpiar el tiempo de espera cuando el componente se desmonta
+  }, [id]); // Dependemos de 'id' para volver a cargar los datos si cambia
 
   return (
     <div
@@ -59,25 +88,29 @@ export default function SetDetail() {
             },
           }}
         >
-          {cards.map((card) => (
-            <SwiperSlide key={card.id}>
-              <div className="flex flex-col bg-gray-100 p-4 rounded-md shadow-md">
-                <img
-                  src={card.image}
-                  alt={card.name}
-                  className="w-full h-48 object-contain"
-                />
-                <h3 className="text-lg font-bold mt-4">{card.name}</h3>
-                {/* Botón para ver la info de la carta */}
-                <Link
-                  href={`/cards/${card.id}`}
-                  className="mt-2 text-sm text-blue-500 hover:text-blue-600"
-                >
-                  Info de carta
-                </Link>
-              </div>
-            </SwiperSlide>
-          ))}
+          {cards.length === 0 ? (
+            <div className="text-center">Cargando cartas...</div>
+          ) : (
+            cards.map((card) => (
+              <SwiperSlide key={card.id}>
+                <div className="flex flex-col bg-gray-100 p-4 rounded-md shadow-md">
+                  <Image
+                    src={card.image}
+                    alt={card.name}
+                    className="w-full h-48 object-contain"
+                  />
+                  <h3 className="text-lg font-bold mt-4">{card.name}</h3>
+                  {/* Botón para ver la info de la carta */}
+                  <Link
+                    href={`/cards/${card.id}`}
+                    className="mt-2 text-sm text-blue-500 hover:text-blue-600"
+                  >
+                    Info de carta
+                  </Link>
+                </div>
+              </SwiperSlide>
+            ))
+          )}
         </Swiper>
       </div>
     </div>
