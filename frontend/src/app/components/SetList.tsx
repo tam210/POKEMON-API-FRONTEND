@@ -1,9 +1,11 @@
 // src/app/components/SetList.tsx
 "use client";
+import { Set } from "@/types";
 import Link from "next/link";
 import { useState } from "react";
 
-export default function SetList({ sets }: { sets: any[] }) {
+// Client Component that receives data as props
+export default function SetList({ sets }: { sets: Set[] }) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {sets.map((set) => (
@@ -30,7 +32,7 @@ export default function SetList({ sets }: { sets: any[] }) {
   );
 }
 
-function InfoButton({ set }: { set: any }) {
+function InfoButton({ set }: { set: Set }) {
   const [showInfo, setShowInfo] = useState(false);
 
   const toggleInfo = () => {

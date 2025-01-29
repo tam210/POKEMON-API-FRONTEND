@@ -1,6 +1,7 @@
 // src/pages/home/page.tsx
 
 import Link from "next/link";
+import Image from "next/image";
 
 export default function HomePage() {
   return (
@@ -13,11 +14,8 @@ export default function HomePage() {
         
         {/* Imagen de fondo */}
         <div className="mb-8">
-          <img
-            src="/hello_pokemon.png" // Asegúrate de tener esta imagen o reemplázala
-            alt="Pokémon"
-            className="w-48 h-auto"
-          />
+
+          <Image src="/hello_pokemon.png" alt="Pokemon" width={200} height={300} />
         </div>
 
         {/* Texto introductorio */}

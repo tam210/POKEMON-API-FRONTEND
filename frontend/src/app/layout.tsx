@@ -1,8 +1,6 @@
 // src/app/layout.tsx
-import './globals.css';
-
+import './globals.css';  // Estilos globales
 import Navbar from './components/Navbar';
-
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -12,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode; }) {
   return (
-    <html lang="en">
+    <html lang="es">  {/* Ajustado a español si tu aplicación está en ese idioma */}
       <head>
         {/* Link a la fuente de Google Fonts: Press Start 2P */}
         <link
@@ -31,8 +29,6 @@ export default function RootLayout({ children }: { children: React.ReactNode; })
         
         {/* Main Content */}
         <main className="flex-grow container mx-auto py-6">{children}</main>
-        
-        
       </body>
     </html>
   );
