@@ -32,8 +32,7 @@ const Set = sequelize.define('Set', {
     allowNull: false,
   },
   updated_at: {
-    type: DataTypes.TIME,
-    allowNull: false,
+    type: DataTypes.STRING, // TIMESTAMP con zona horaria
   },
   symbol_url: {
     type: DataTypes.STRING,
@@ -47,7 +46,7 @@ const Set = sequelize.define('Set', {
 });
 
 // Relación entre Set y Card
-Set.hasMany(Card, { foreignKey: 'set_id' });
-Card.belongsTo(Set, { foreignKey: 'set_id' });
+Set.hasMany(Card, { foreignKey: 'set_id', as: 'cards' });
+Card.belongsTo(Set, { foreignKey: 'set_id', as: 'set' });
 
 module.exports = Set;

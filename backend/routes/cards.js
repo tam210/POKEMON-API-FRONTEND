@@ -8,11 +8,15 @@ const router = express.Router();
 router.get('/', async (req, res) => {
   try {
     console.log("Iniciando la consulta...");
-    const sets = await Card.findAll({
+    const cards = await Card.findAll({
       limit: 20
     });
-    console.log(`Cantidad de sets obtenidos: ${sets.length}`);
-    res.json(sets);
+    console.log(`Cantidad de sets obtenidos: ${cards.length}`);
+
+        // Convierte las instancias de Sequelize en objetos JSON
+    const cardsJson = sets.map(card => card.toJSON()); 
+  
+    res.json(cardsJson);
   } catch (err) {
     console.error("Error:", err);
     res.status(500).json({ error: err.message });

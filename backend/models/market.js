@@ -15,8 +15,9 @@ const Market = sequelize.define('Market', {
     allowNull: true,
   },
   updated_at: {
-    type: DataTypes.DATE,
-    allowNull: true,
+    type: DataTypes.DATEONLY, // DATE sin zona horaria
+    allowNull: false,
+    defaultValue: sequelize.literal('CURRENT_DATE'),
   },
   market: {
     type: DataTypes.STRING,

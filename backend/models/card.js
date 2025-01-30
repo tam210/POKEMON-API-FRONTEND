@@ -42,11 +42,11 @@ const Card = sequelize.define('Card', {
 });
 
 // Relación entre Card y Image
-Card.hasMany(Image, { foreignKey: 'card_id' });
-Image.belongsTo(Card, { foreignKey: 'card_id' });
+Card.hasOne(Image, { foreignKey: 'card_id', as: 'image' });
+Image.belongsTo(Card, { foreignKey: 'card_id', as: 'card' });
 
 // Relación entre Card y Market
-Card.hasMany(Market, { foreignKey: 'card_id' });
-Market.belongsTo(Card, { foreignKey: 'card_id' });
+Card.hasMany(Market, { foreignKey: 'card_id', as: 'markets' });
+Market.belongsTo(Card, { foreignKey: 'card_id', as: 'card' });
 
 module.exports = Card;
