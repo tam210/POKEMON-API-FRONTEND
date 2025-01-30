@@ -9,7 +9,7 @@ services:
       - "3000:3000"
     environment:
       - NODE_ENV=production
-      - NEXT_PUBLIC_API_URL=http://backend:3001/  # Nombre del servicio del backend en Docker
+      - NEXT_PUBLIC_API_URL=http://backend:3001  # Nombre del servicio del backend en Docker
     networks:
       - app-network
     depends_on:
@@ -29,6 +29,7 @@ services:
       - DB_USER=ash
       - DB_PASSWORD=password
       - DB_NAME=pokemon_db
+      - NEXT_PUBLIC_MODE=frontend
     networks:
       - app-network
     depends_on:
