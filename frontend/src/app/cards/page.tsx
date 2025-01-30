@@ -1,42 +1,21 @@
 import CardList from "@/app/components/CardList";
+import { Card } from "@/types";
 
-// Simulando la obtención de todas las cartas (deberías hacer una llamada a la API real)
+// Obtención de todas las cartas (deberías hacer una llamada a la API real)
 async function fetchAllCards() {
-  return [
-    {
-      id: 1,
-      name: "Pikachu",
-      supertype: "Pokémon",
-      subtypes: "Basic",
-      types: "Electric",
-      set_id: 1,
-      number: "1/102",
-      rarity: "Common",
-    },
-    {
-      id: 2,
-      name: "Charizard",
-      supertype: "Pokémon",
-      subtypes: "Stage 2",
-      types: "Fire",
-      set_id: 1,
-      number: "4/102",
-      rarity: "Rare Holo",
-    },
-    {
-      id: 3,
-      name: "Bulbasaur",
-      supertype: "Pokémon",
-      subtypes: "Basic",
-      types: "Grass",
-      set_id: 1,
-      number: "2/102",
-      rarity: "Common",
-    },
-  ];
+  const response = await fetch("http://localhost:3001/api/cards"); // Cambia esta URL si es necesario
+  const data = await response.json();
+  
+  return data.map((card: Card) => ({
+    id: card.id,
+    name: card.name,
+    supertype: card.supertype,
+    types: card.types,
+    number: card.number,
+    rarity: card.rarity,
+    image: card.image,  // Asegúrate de que `image` esté disponible en los datos
+  }));
 }
-
-
 
 export default async function CardsPage() {
   const cards = await fetchAllCards();
