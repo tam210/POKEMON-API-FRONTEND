@@ -32,10 +32,10 @@ export default function HomePage() {
             Ver Sets
           </Link>
           <Link
-            href="/about"
+            href="/cards"
             className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full text-xl transition duration-300"
           >
-            Acerca de
+            Ver cartas
           </Link>
         </div>
       </div>
