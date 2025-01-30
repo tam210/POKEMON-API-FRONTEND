@@ -5,8 +5,9 @@
 /* Fondo y estilo general de la página */
 body {
   font-family: 'VT323', sans-serif;
-  background: linear-gradient(to right, #ffffff, #cecece);
+  background: #ffffff;  
   margin: 0;
+  color: #4a4a4a; /* Texto gris oscuro para buena legibilidad */
   padding: 0;
   overflow-x: hidden;
 }
