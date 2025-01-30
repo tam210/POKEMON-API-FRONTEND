@@ -8,29 +8,26 @@ import "swiper/css"; // Importamos los estilos básicos de Swiper
 import "swiper/css/navigation"; // Importamos los estilos para la navegación
 import { Navigation } from "swiper/modules"; // Importamos el módulo de navegación correctamente
 import Image from 'next/image';
+import { Card } from "@/types";
 
-// Definición de tipos para las cartas
-interface Card {
-  id: number;
-  name: string;
-  image: string;
-}
-
-// Simulación de llamada a API (puedes cambiarlo por la llamada real a tu API)
+// Función para obtener las sets desde el backend (API)
 const fetchCardsBySetId = async (setId: string): Promise<Card[]> => {
-  // Simulamos la llamada a una API para obtener las cartas por el setId
-  console.log(setId);
-  return new Promise((resolve) =>
-    setTimeout(() => {
-      resolve([
-        { id: 1, name: "Charizard", image: "/images/charizard.png" },
-        { id: 2, name: "Blastoise", image: "/images/blastoise.png" },
-        { id: 3, name: "Venusaur", image: "/images/venusaur.png" },
-        { id: 4, name: "Pikachu", image: "/images/pikachu.png" },
-        { id: 5, name: "Mewtwo", image: "/images/mewtwo.png" },
-      ]);
-    }, 1000)
-  );
+  try {
+    const response = await fetch(`http://localhost:3001/api/sets/${setId}/cards`);
+    if (!response.ok) {
+      throw new Error("Error al obtener las cartas");
+    }
+    const data = await response.json();
+    
+    return data.cards.map((card: any) => ({
+      id: card.id,
+      name: card.name,
+      image: card.image ? card.image : { url: "/images/default.png" }, // Si no existe la imagen, asignamos un objeto con una URL predeterminada
+    }));
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
 };
 
 export default function SetDetail() {
@@ -94,13 +91,18 @@ export default function SetDetail() {
             cards.map((card) => (
               <SwiperSlide key={card.id}>
                 <div className="flex flex-col bg-gray-100 p-4 rounded-md shadow-md">
-                  <Image
-                    src={card.image}
-                    alt={card.name}
-                    className="w-full h-48 object-contain"
-                  />
+                  {card.image && card.image.url ? (
+                    <Image
+                      src={card.image.url} // Ahora accedemos correctamente a 'image.url'
+                      alt={card.name}
+                      width={200}
+                      height={200}
+                      className="w-full h-48 object-contain"
+                    />
+                  ) : (
+                    <div className="w-full h-48 bg-gray-300 flex justify-center items-center">Sin imagen</div> // Si no hay imagen
+                  )}
                   <h3 className="text-lg font-bold mt-4">{card.name}</h3>
-                  {/* Botón para ver la info de la carta */}
                   <Link
                     href={`/cards/${card.id}`}
                     className="mt-2 text-sm text-blue-500 hover:text-blue-600"
