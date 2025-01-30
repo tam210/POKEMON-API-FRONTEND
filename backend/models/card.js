@@ -12,6 +12,10 @@ const Card = sequelize.define('Card', {
     type: DataTypes.STRING,
     allowNull: true,
   },
+  subtypes: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
   supertype: {
     type: DataTypes.STRING,
     allowNull: true,
