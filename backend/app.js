@@ -1,19 +1,23 @@
 const express = require('express');
+const cors = require('cors');
 
 // Rutas
 const setRouter= require('./routes/sets');
 const cardRouter = require('./routes/cards');
 
-
-
 const sequelize = require('./config/database');
 const app = express();
 const PORT = 3001;
-const cors = require('cors');
+
+
+
+app.use(cors({ //cambiar a frontend
+  origin: 'http://localhost:3000', // Asegúrate de que este sea el nombre del servicio frontend en Docker Compose
+  credentials: true,
+}));
 
 // Middleware
 app.use(express.json());
-app.use(cors());
 
 // Rutas
 app.use('/api/sets', setRouter);
