@@ -3,7 +3,8 @@ import { Card } from "@/types";
 
 // Obtención de todas las cartas (deberías hacer una llamada a la API real)
 async function fetchAllCards() {
-  const response = await fetch("http://localhost:3001/api/cards"); // Cambia esta URL si es necesario
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  const response = await fetch(`${apiUrl}/api/cards`); // Cambia esta URL si es necesario
   const data = await response.json();
   
   return data.map((card: Card) => ({
@@ -27,3 +28,5 @@ export default async function CardsPage() {
     </div>
   );
 }
+
+export const dynamic = 'force-dynamic';

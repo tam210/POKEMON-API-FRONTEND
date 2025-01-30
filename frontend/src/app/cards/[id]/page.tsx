@@ -3,8 +3,9 @@ import CardImage from "../../components/CardImage"; // Asegúrate de importar el
 
 // Realiza la solicitud fetch a la API para obtener los detalles de la carta
 async function getCardDetails(id: string) {
-  try {
-    const res = await fetch(`http://localhost:3001/api/cards/${id}`);
+  try { 
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+    const res = await fetch(`${apiUrl}/api/cards/${id}`);
     
     // Verificamos si la respuesta es exitosa (status 200)
     if (!res.ok) {
@@ -36,8 +37,14 @@ export default async function CardDetailPage({ params }: { params: { id: string 
     <div className="p-6 flex justify-center animate__animated animate__fadeIn bg-gray-50">
       <div className="flex flex-wrap w-full max-w-4xl gap-6 bg-white p-6 rounded-lg shadow-lg">
         {/* Imagen de la carta a la izquierda */}
-        <div className="w-full sm:w-1/3 flex justify-center mb-6 sm:mb-0">
-          <CardImage src={card.image || "/placeholder.png"} alt={card.name} />
+        <div className="w-full sm:w-1/3 flex justify-center items-center">
+          {/* Pasamos las dimensiones de la imagen */}
+          <CardImage 
+            src={card.image || "/placeholder.png"} 
+            alt={card.name} 
+            width={500} 
+            height={700} 
+          />
         </div>
 
         {/* Información de la carta a la derecha */}
@@ -83,3 +90,4 @@ export default async function CardDetailPage({ params }: { params: { id: string 
     </div>
   );
 }
+export const dynamic = 'force-dynamic';

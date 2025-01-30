@@ -13,7 +13,8 @@ import { Card } from "@/types";
 // Función para obtener las sets desde el backend (API)
 const fetchCardsBySetId = async (setId: string): Promise<Card[]> => {
   try {
-    const response = await fetch(`http://localhost:3001/api/sets/${setId}/cards`);
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+    const response = await fetch(`${apiUrl}/api/sets/${setId}/cards`);
     if (!response.ok) {
       throw new Error("Error al obtener las cartas");
     }
@@ -22,7 +23,7 @@ const fetchCardsBySetId = async (setId: string): Promise<Card[]> => {
     return data.cards.map((card: any) => ({
       id: card.id,
       name: card.name,
-      image: card.image ? card.image : { url: "/images/default.png" }, // Si no existe la imagen, asignamos un objeto con una URL predeterminada
+      image: card.image.url ? card.image.url : { url: "/images/default.png" }, // Si no existe la imagen, asignamos un objeto con una URL predeterminada
     }));
   } catch (error) {
     console.error(error);
@@ -91,9 +92,9 @@ export default function SetDetail() {
             cards.map((card) => (
               <SwiperSlide key={card.id}>
                 <div className="flex flex-col bg-gray-100 p-4 rounded-md shadow-md">
-                  {card.image && card.image.url ? (
+                  {card.image ? (
                     <Image
-                      src={card.image.url} // Ahora accedemos correctamente a 'image.url'
+                      src={card.image} // Ahora accedemos correctamente a 'image.url'
                       alt={card.name}
                       width={200}
                       height={200}
@@ -118,3 +119,4 @@ export default function SetDetail() {
     </div>
   );
 }
+export const dynamic = 'force-dynamic';

@@ -17,7 +17,9 @@ interface Set {
 
 // Función para obtener los sets desde el backend (API)
 async function fetchSets(): Promise<Set[]> {
-  const res = await fetch("http://localhost:3001/api/sets"); // Cambia esta URL si es necesario
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  console.log(apiUrl);
+  const res = await fetch(`${apiUrl}/api/sets`); // Cambia esta URL si es necesario
   if (!res.ok) {
     throw new Error("Error al obtener los sets");
   }
@@ -25,6 +27,8 @@ async function fetchSets(): Promise<Set[]> {
   console.log(sets);
   return sets; // Devuelve la respuesta en formato JSON
 }
+
+
 
 // Este es un componente asincrónico para obtener los datos y renderizar la página
 export default async function SetsPage() {
@@ -42,3 +46,4 @@ export default async function SetsPage() {
     </div>
   );
 }
+export const dynamic = 'force-dynamic';
