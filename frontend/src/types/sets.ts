@@ -11,12 +11,13 @@ export interface Card {
   id: number;
   name: string;
   supertype: string;
-  subtypes: string;
+  subtypes: string [];
   types: string;
   set_id: number;
   number: string;
   rarity: string;
-  image?: Image;
+  image: string;
+  markets: Market[];
 }
 
 // Interfaz para el set de cartas
