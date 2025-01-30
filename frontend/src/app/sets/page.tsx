@@ -1,4 +1,3 @@
-// src/app/sets/page.tsx
 import SetList from "@/app/components/SetList";
 
 // Definir los tipos de Set
@@ -16,46 +15,30 @@ interface Set {
   cards: number[]; // IDs de las cartas
 }
 
-// Simulación de datos para sets (puede venir de una API)
+// Función para obtener los sets desde el backend (API)
 async function fetchSets(): Promise<Set[]> {
-  return [
-    {
-      id: 1,
-      name: "Base Set",
-      series: "Base",
-      printed_total: 102,
-      total: 102,
-      ptcgo_code: "BS1",
-      release_date: "1999-01-09",
-      updated_at: "2022-11-25", // La última fecha de actualización del set
-      symbol_url: "/images/symbol_base.png",
-      logo_url: "/images/logo_base.png",
-      cards: [1, 2, 3, 4, 5], // IDs de las cartas
-    },
-    {
-      id: 2,
-      name: "Jungle",
-      series: "Base",
-      printed_total: 64,
-      total: 64,
-      ptcgo_code: "JU1",
-      release_date: "1999-06-16",
-      updated_at: "2022-11-25", // Fecha de actualización
-      symbol_url: "/images/symbol_jungle.png",
-      logo_url: "/images/logo_jungle.png",
-      cards: [6, 7, 8, 9, 10], // IDs de las cartas
-    }
-  ];
+  const res = await fetch("http://localhost:3001/api/sets"); // Cambia esta URL si es necesario
+  if (!res.ok) {
+    throw new Error("Error al obtener los sets");
+  }
+  const sets = await res.json();
+  console.log(sets);
+  return sets; // Devuelve la respuesta en formato JSON
 }
 
 // Este es un componente asincrónico para obtener los datos y renderizar la página
 export default async function SetsPage() {
-  const sets = await fetchSets(); // Obtener los datos asincrónicamente
+  let sets: Set[] = [];
+  try {
+    sets = await fetchSets(); // Obtener los datos de la API
+  } catch (error) {
+    console.error("Error al cargar los sets", error);
+  }
 
   return (
     <div className="p-6">
       <h1 className="text-4xl font-bold mb-6">Sets de Cartas Pokémon</h1>
-      <SetList sets={sets} />
+      <SetList sets={sets} /> {/* Mostrar los sets */}
     </div>
   );
 }

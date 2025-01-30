@@ -11,12 +11,12 @@ export interface Card {
   id: number;
   name: string;
   supertype: string;
-  subtypes: string[];
-  types: string[];
+  subtypes: string;
+  types: string;
   set_id: number;
   number: string;
   rarity: string;
-  images: Image[];  // Un array de imágenes relacionadas con la carta
+  image?: Image;
 }
 
 // Interfaz para el set de cartas
@@ -31,7 +31,6 @@ export interface Set {
   updated_at: string;
   symbol_url: string;
   logo_url: string;
-  cards: number[];  // Un set tiene un array de cartas
 }
 
 // Interfaz para el mercado de una carta
