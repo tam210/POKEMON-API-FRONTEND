@@ -13,13 +13,17 @@ export default function CardList({ cards }: { cards: Card[] }) {
           key={card.id}
           className="w-64 bg-gray-100 p-4 rounded-md shadow-md animate__animated animate__fadeIn"
         >
-          <Image
-            src={card.images[0]?.url || "/placeholder.png"}
-            alt={card.name}
-            className="w-full h-48 object-contain mb-4"
-          />
+        <Image
+          src={card.image || "/placeholder.png"}
+          alt={card.name}
+          width={card.image ? 256 : 200} // Cambia estas dimensiones según sea necesario
+          height={card.image ? 256 : 200}
+          className="w-full h-48 object-contain mb-4"
+        />
           <h3 className="text-xl font-bold">{card.name}</h3>
-          <p className="text-gray-600">{card.supertype}</p>
+          <p className="text-gray-600">Tipo: {card.types}</p>
+          <p className="text-gray-600">Rareza: {card.rarity}</p>
+
 
           {/* Botón de "Ver info de carta" */}
           <Link
