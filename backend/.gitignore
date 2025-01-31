@@ -6,5 +6,5 @@
 /build
 
 
-# env files (can opt-in for committing if needed)
+# env files (comentada para hacer más fácil la revisión)
 .env*
