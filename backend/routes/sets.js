@@ -23,9 +23,6 @@ router.get('/', async (req, res) => {
   }
 });
 
-
-
-// Ruta para obtener un set por ID con sus cartas e imágenes
 // Ruta para obtener un set por ID con sus cartas e imágenes
 router.get("/:id/cards", async (req, res) => {
   try {

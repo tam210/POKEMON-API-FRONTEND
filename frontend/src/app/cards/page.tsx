@@ -14,7 +14,7 @@ async function fetchAllCards() {
     types: card.types,
     number: card.number,
     rarity: card.rarity,
-    image: card.image,  // Asegúrate de que `image` esté disponible en los datos
+    image: card.image,  
   }));
 }
 

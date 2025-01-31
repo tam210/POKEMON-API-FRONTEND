@@ -19,8 +19,8 @@ const Image = sequelize.define('Image', {
     allowNull: true,
   },
 }, {
-  tableName: 'image',  // Asegúrate de que el nombre coincida con el de la tabla
-  timestamps: false    // Si la tabla no tiene campos `createdAt` y `updatedAt`, desactívalos
+  tableName: 'image',  
+  timestamps: false   
 });
 
 module.exports = Image;

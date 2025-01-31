@@ -25,7 +25,7 @@ router.get('/', async (req, res) => {
       types: card.types,
       number: card.number,
       rarity: card.rarity,
-      image: card.image ? card.image.url : "/images/default.png",  // Asegúrate de acceder correctamente a la URL de la imagen
+      image: card.image ? card.image.url : "/images/default.png", 
     }));
 
     res.json(cardsJson);
@@ -67,8 +67,8 @@ router.get('/:id', async (req, res) => {
       image: card.image ? card.image.url : "/images/default.png",  // Asegúrate de acceder correctamente a la URL de la imagen
       markets: card.markets.map(market => ({
         marketId: market.id,
-        marketName: market.market, // Ajusta si el nombre del mercado tiene otro campo
-        marketUrl: market.url, // Añade otros campos relacionados con el mercado
+        marketName: market.market, // 
+        marketUrl: market.url, 
       })),
     });
   } catch (err) {

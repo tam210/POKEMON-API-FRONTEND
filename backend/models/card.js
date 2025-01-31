@@ -41,8 +41,8 @@ const Card = sequelize.define('Card', {
     allowNull: true,
   },
 }, {
-  tableName: 'card',  // Asegúrate de que el nombre coincida con el de la tabla
-  timestamps: false    // Si la tabla no tiene campos `createdAt` y `updatedAt`, desactívalos
+  tableName: 'card',  
+  timestamps: false    
 });
 
 // Relación entre Card y Image

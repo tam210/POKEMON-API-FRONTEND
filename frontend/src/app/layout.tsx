@@ -12,7 +12,7 @@ export default function RootLayout({ children }: { children: React.ReactNode; })
   return (
     <html lang="es">  {/* Ajustado a español si tu aplicación está en ese idioma */}
       <head>
-        {/* Link a la fuente de Google Fonts: Press Start 2P */}
+        {/* Link a la fuente de Google Fonts: VT323 */}
         <link
           href="https://fonts.googleapis.com/css2?family=VT323&display=swap"
           rel="stylesheet"

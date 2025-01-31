@@ -41,8 +41,8 @@ const Set = sequelize.define('Set', {
     type: DataTypes.STRING,
   },
 }, {
-  tableName: 'set',  // Asegúrate de que el nombre coincida con el de la tabla
-  timestamps: false    // Si la tabla no tiene campos `createdAt` y `updatedAt`, desactívalos
+  tableName: 'set',  
+  timestamps: false    
 });
 
 // Relación entre Set y Card

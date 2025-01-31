@@ -24,8 +24,8 @@ const Market = sequelize.define('Market', {
     allowNull: true,
   },
 }, {
-  tableName: 'market',  // Asegúrate de que el nombre coincida con el de la tabla
-  timestamps: false    // Si la tabla no tiene campos `createdAt` y `updatedAt`, desactívalos
+  tableName: 'market',  
+  timestamps: false   
 });
 
 
