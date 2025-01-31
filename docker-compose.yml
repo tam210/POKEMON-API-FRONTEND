@@ -1,0 +1,56 @@
+version: '3.8'
+services:
+  # Frontend - Next.js
+  frontend:
+    build:
+      context: ./frontend  # Usa la carpeta frontend como contexto
+      dockerfile: Dockerfile  # El Dockerfile está en la raíz de ./frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_API_URL=http://backend:3001  # Nombre del servicio del backend en Docker
+    networks:
+      - app-network
+    depends_on:
+      - backend  # Asegura que la base de datos esté lista antes de iniciar el frontend
+
+  # Backend - Express.js
+  backend:
+    build:
+      context: ./backend  # Usa la carpeta backend como contexto
+      dockerfile: Dockerfile  # El Dockerfile está en la raíz de ./backend
+    ports:
+      - "3001:3001"  # Ajusta el puerto si es necesario
+    environment:
+      - NODE_ENV=production
+      - DB_HOST=db  # Nombre del servicio de base de datos
+      - DB_PORT=5432
+      - DB_USER=ash
+      - DB_PASSWORD=password
+      - DB_NAME=pokemon_db
+      - NEXT_PUBLIC_MODE=frontend
+    networks:
+      - app-network
+    depends_on:
+      - db  # Asegura que la base de datos esté lista antes de iniciar el backend
+
+  # Base de datos PostgreSQL
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: ash
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: pokemon_db
+    volumes:
+      - ./db_data:/var/lib/postgresql/data
+      - ./database/database_backup.sql:/docker-entrypoint-initdb.d/database_backup.sql
+      - ./database/create_user_and_db.sql:/docker-entrypoint-initdb.d/create_user_and_db.sql  # Agregar el archivo SQL aquí
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

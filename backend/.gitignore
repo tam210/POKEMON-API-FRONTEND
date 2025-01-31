@@ -1,0 +1,10 @@
+
+# dependencies
+/node_modules
+
+# production
+/build
+
+
+# env files (comentada para hacer más fácil la revisión)
+.env*
