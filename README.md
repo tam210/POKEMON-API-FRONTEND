@@ -83,6 +83,9 @@ cd POKEMON-API-FRONTEND
     ```bash
     NEXT_PUBLIC_API_URL=http://localhost:3001
     ```
+2. Se levanta servicio de base de datos desde docker-compose
+2. Ejecución del backend en ruta /backend con el comando "node app.js"
+2. Ejecución del frontend en ruta /frontend con el comando "npm run dev"
 
 ## Acceder a rutas
 Luego de la ejecución, local o por contenedores, levantará los siguientes servicios:
