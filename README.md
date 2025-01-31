@@ -4,6 +4,22 @@ ste proyecto es una aplicación Fullstack que permite listar y visualizar sets y
 
 ---
 
+## Funcionalidades
+
+### API REST con PostgreSQL
+Endpoints desarrollados:
+- /sets
+- /sets/:id/cards
+- /cards
+- /cards:id
+### Frontend con Nextjs y Tailwindcss
+- Listar los sets disponibles.
+- Mostrar las cartas correspondientes a cada set.
+- Visualizar información detallada de una carta en una vista individual.
+
+### Infraestructura
+- Docker para la configuración del entorno de desarrollo, incluyendo la base de datos, API y frontend.
+
 
 ## Requisitos
 
@@ -22,6 +38,7 @@ ste proyecto es una aplicación Fullstack que permite listar y visualizar sets y
 
 ---
 
+
 ## Configuración del Entorno
 
 ### 1. **Clonar el Repositorio**
@@ -33,9 +50,9 @@ cd POKEMON-API-FRONTEND
 ---
 ### 2. Instrucciones de Ejecución
 
-## Ejecutar proyecto
+#### Ejecutar proyecto
 
-### Opción 1: Ejecutar con Docker Compose
+#### Opción 1: Ejecutar con Docker Compose
 1. Se cambia en las variables del .env el valor por defecto "localhost". 
     En el .env del backend se establece:
     ```bash
@@ -52,10 +69,10 @@ cd POKEMON-API-FRONTEND
     ```
     ---
 
-#### Limitaciones
+##### Limitaciones
 - Fetch del frontend al backend limitada: No se cargan las imágenes correctamente debido a problemas con la optimización en el renderizado de Next.js [ :( ]
 
-### Opción 2: Ejecutar localmente
+#### Opción 2: Ejecutar localmente
 
 1. Se cambia en las variables .env POR el valor "localhost". 
     .env del backend:
